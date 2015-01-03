@@ -7,11 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PowerLogger.h"
+
+
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+        while(TRUE)
+        {
+            [PowerLogger scanNetworks];
+            sleep(5);
+        }
     }
     return 0;
 }
