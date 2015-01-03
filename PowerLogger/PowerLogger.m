@@ -18,10 +18,11 @@ NSStringEncoding _encoding;
 
 - (id)initWithPath: (NSString *)path
 {
-    _path = path;
+    _path = [path stringByExpandingTildeInPath];
     _encoding = NSUTF8StringEncoding;
-    NSError *err;
-    [[PLRecord csvHeader] writeToFile:path atomically:false encoding:_encoding error:&err];
+    
+    [[NSFileManager defaultManager] createFileAtPath: _path contents :[[PLRecord csvHeader] dataUsingEncoding: _encoding] attributes:nil];
+    NSLog([NSString stringWithFormat: @"Writing data to %@", _path]);
     return self;
 }
 
@@ -52,6 +53,7 @@ NSStringEncoding _encoding;
 - (void) printNetwork: (CWNetwork*) network
 {
     PLRecord *rec = [PLRecord initFromNetwork:network];
+    NSLog([rec asCSV]);
     [self appendCSV: [rec asCSV]];
 }
 @end

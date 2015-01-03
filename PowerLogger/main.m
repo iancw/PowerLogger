@@ -13,12 +13,19 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        NSLog([NSString stringWithFormat:@"Argc=%d", argc]);
-        NSString* path = [NSString stringWithUTF8String: argv[0]];
-        NSLog([NSString stringWithFormat:@"Argc=%d", argc]);
-        PowerLogger *pl = [[PowerLogger alloc] initWithPath: path];
-        {
+        
+        if (argc != 2){
+            NSString* progName = [[NSString stringWithUTF8String: argv[0]] lastPathComponent];
+            NSString* usage = [NSString stringWithFormat: @"Usage:  %@ <path to csv>\n", progName];
+            printf([usage UTF8String]);
+            return 1;
+        }
 
+        NSString* path = [NSString stringWithUTF8String: argv[1]];
+        PowerLogger *pl = [[PowerLogger alloc] initWithPath: path];
+        while(TRUE)
+        {
+            NSLog(@"Scanning...");
             [pl scanNetworks];
             sleep(5);
         }

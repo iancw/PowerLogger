@@ -57,12 +57,12 @@
 
 + (NSString*) csvHeader
 {
-    return @"SSID,Band,Channel,ChannelWidth,RSSI(dBm),Noise(dBm)";
+    return @"SSID,Band,Channel,ChannelWidth,RSSI(dBm),Noise(dBm)\n";
 }
 
 - (NSString*) asCSV
 {
-    return [NSString stringWithFormat: @"%@,%@,%d,%@,%d,%d",
+    return [NSString stringWithFormat: @"%@,%@,%d,%@,%d,%d\n",
      [self ssid],
      [PLRecord formatBand: [self band]],
      (int)[self channelNo],
