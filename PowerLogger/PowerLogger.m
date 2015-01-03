@@ -9,36 +9,31 @@
 #import <Foundation/Foundation.h>
 #import <CoreWLAN/CoreWLAN.h>
 #import "PowerLogger.h"
+#import "PLRecord.h"
 
 @implementation PowerLogger
 
-+ (NSString*) formatBand: (CWChannelBand) band
+NSString *_path;
+NSStringEncoding _encoding;
+
+- (id)initWithPath: (NSString *)path
 {
-    switch(band)
-    {
-        case kCWChannelBand2GHz:
-            return @"2.4 GHz";
-        case kCWChannelBand5GHz:
-            return @"5 GHz";
-        default:
-            return @"Unknown";
-    }
+    _path = path;
+    _encoding = NSUTF8StringEncoding;
+    NSError *err;
+    [[PLRecord csvHeader] writeToFile:path atomically:false encoding:_encoding error:&err];
+    return self;
 }
 
-+ (NSString*) formatWidth: (CWChannelWidth) width
+- (void) appendCSV: (NSString*) csv
 {
-    switch(width)
-    {
-        case kCWChannelWidth20MHz:
-            return @"20 MHz";
-        case kCWChannelWidth40MHz:
-            return @"40 MHz";
-        case kCWChannelWidth80MHz:
-            return @"80 MHz";
-        case kCWChannelWidth160MHz:
-            return @"160 MHz";
-        default:
-            return @"Unknown";
+    NSFileHandle *handle = [NSFileHandle fileHandleForWritingAtPath: _path];
+    if (handle){
+        [handle seekToEndOfFile];
+        [handle writeData:[csv dataUsingEncoding:_encoding]];
+        [handle closeFile];
+    }else{
+        NSLog([NSString stringWithFormat:@"No such file %@, soemthing went wrong", _path]);
     }
 }
 
@@ -56,15 +51,7 @@
 
 - (void) printNetwork: (CWNetwork*) network
 {
-    NSInteger rssi = [network rssiValue];
-    NSInteger noise = [network noiseMeasurement];
-    NSString *ssid = [network ssid];
-    CWChannel *chan = [network wlanChannel];
-    CWChannelBand band = [chan channelBand];
-    CWChannelWidth width = [chan channelWidth];
-    NSInteger channelNo = [chan channelNumber];
-    NSLog([NSString stringWithFormat:@"%@ rssi=%d dBm, noise=%d dBm, band=%@, channel=%d, channel width=%@",
-           ssid, (int) rssi, (int) noise, [PowerLogger formatBand: band], (int)channelNo, [PowerLogger formatWidth: width]]);
-    
+    PLRecord *rec = [PLRecord initFromNetwork:network];
+    [self appendCSV: [rec asCSV]];
 }
 @end

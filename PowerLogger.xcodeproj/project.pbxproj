@@ -11,6 +11,7 @@
 		3C5BD18A1A5761E300C5E8CA /* CoreWLAN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5BD1891A5761E300C5E8CA /* CoreWLAN.framework */; };
 		3CC747921A583D0A00A332E2 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC747911A583D0A00A332E2 /* CHCSVParser.m */; };
 		3CC747951A583D4500A332E2 /* PowerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC747941A583D4500A332E2 /* PowerLogger.m */; };
+		3CC747981A5843EA00A332E2 /* PLRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC747971A5843EA00A332E2 /* PLRecord.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,8 @@
 		3CC747911A583D0A00A332E2 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 		3CC747931A583D3100A332E2 /* PowerLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PowerLogger.h; sourceTree = "<group>"; };
 		3CC747941A583D4500A332E2 /* PowerLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerLogger.m; sourceTree = "<group>"; };
+		3CC747961A5843D100A332E2 /* PLRecord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLRecord.h; sourceTree = "<group>"; };
+		3CC747971A5843EA00A332E2 /* PLRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLRecord.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,8 @@
 				3C5BD1821A5761CF00C5E8CA /* main.m */,
 				3CC747931A583D3100A332E2 /* PowerLogger.h */,
 				3CC747941A583D4500A332E2 /* PowerLogger.m */,
+				3CC747961A5843D100A332E2 /* PLRecord.h */,
+				3CC747971A5843EA00A332E2 /* PLRecord.m */,
 			);
 			path = PowerLogger;
 			sourceTree = "<group>";
@@ -132,6 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CC747981A5843EA00A332E2 /* PLRecord.m in Sources */,
 				3CC747921A583D0A00A332E2 /* CHCSVParser.m in Sources */,
 				3C5BD1831A5761CF00C5E8CA /* main.m in Sources */,
 				3CC747951A583D4500A332E2 /* PowerLogger.m in Sources */,

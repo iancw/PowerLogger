@@ -12,6 +12,7 @@
 #import <CoreWLAN/CoreWLAN.h>
 @interface PowerLogger:NSObject
 
+- (id)initWithPath:(NSString*)path;
 - (void)scanNetworks;
 - (void)printNetwork: (CWNetwork*) network;
 

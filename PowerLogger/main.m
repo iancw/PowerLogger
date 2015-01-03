@@ -13,9 +13,12 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        while(TRUE)
+        NSLog([NSString stringWithFormat:@"Argc=%d", argc]);
+        NSString* path = [NSString stringWithUTF8String: argv[0]];
+        NSLog([NSString stringWithFormat:@"Argc=%d", argc]);
+        PowerLogger *pl = [[PowerLogger alloc] initWithPath: path];
         {
-            PowerLogger *pl = [[PowerLogger alloc] init];
+
             [pl scanNetworks];
             sleep(5);
         }
