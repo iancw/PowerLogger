@@ -42,7 +42,7 @@
     }
 }
 
-+ (void) scanNetworks
+- (void) scanNetworks
 {
     CWWiFiClient *client = [CWWiFiClient sharedWiFiClient];
     CWInterface *interface = [client interface];
@@ -50,11 +50,11 @@
     NSSet *networks = [interface scanForNetworksWithName:nil error:&err];
     for (CWNetwork *network in networks)
     {
-        [PowerLogger printNetwork: network];
+        [self printNetwork: network];
     }
 }
 
-+ (void) printNetwork: (CWNetwork*) network
+- (void) printNetwork: (CWNetwork*) network
 {
     NSInteger rssi = [network rssiValue];
     NSInteger noise = [network noiseMeasurement];

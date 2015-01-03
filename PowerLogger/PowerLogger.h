@@ -12,8 +12,8 @@
 #import <CoreWLAN/CoreWLAN.h>
 @interface PowerLogger:NSObject
 
-+ (void)scanNetworks;
-+ (void)printNetwork: (CWNetwork*) network;
+- (void)scanNetworks;
+- (void)printNetwork: (CWNetwork*) network;
 
 @end
 

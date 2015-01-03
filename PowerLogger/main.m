@@ -15,7 +15,8 @@ int main(int argc, const char * argv[]) {
     @autoreleasepool {
         while(TRUE)
         {
-            [PowerLogger scanNetworks];
+            PowerLogger *pl = [[PowerLogger alloc] init];
+            [pl scanNetworks];
             sleep(5);
         }
     }
