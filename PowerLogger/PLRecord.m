@@ -11,6 +11,7 @@
 
 @implementation PLRecord
 
+NSDateFormatter *_formatter;
 
 + (NSString*) formatBand: (CWChannelBand) band
 {
@@ -42,27 +43,29 @@
     }
 }
 
-+ (PLRecord*) initFromNetwork:(CWNetwork *)network
+- (id) initFromNetwork:(CWNetwork *)network andDate:(NSDate *)date
 {
-    PLRecord *rec = [PLRecord new];
-    [rec setRssi: [network rssiValue]];
-    [rec setNoise: [network noiseMeasurement]];
+    [self setRssi: [network rssiValue]];
+    [self setNoise: [network noiseMeasurement]];
     [rec setSsid: [network ssid]];
     CWChannel *chan = [network wlanChannel];
     [rec setBand: [chan channelBand]];
     [rec setWidth: [chan channelWidth]];
     [rec setChannelNo: [chan channelNumber]];
+    [rec setDate: date];
+    ec._formatter =
     return rec;
 }
 
 + (NSString*) csvHeader
 {
-    return @"SSID,Band,Channel,ChannelWidth,RSSI(dBm),Noise(dBm)\n";
+    return @"Date,SSID,Band,Channel,ChannelWidth,RSSI(dBm),Noise(dBm)\n";
 }
 
 - (NSString*) asCSV
 {
-    return [NSString stringWithFormat: @"%@,%@,%d,%@,%d,%d\n",
+    return [NSString stringWithFormat: @"%@,%@,%@,%d,%@,%d,%d\n",
+     [self date],
      [self ssid],
      [PLRecord formatBand: [self band]],
      (int)[self channelNo],

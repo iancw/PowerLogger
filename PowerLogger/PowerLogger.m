@@ -52,7 +52,7 @@ NSStringEncoding _encoding;
 
 - (void) printNetwork: (CWNetwork*) network
 {
-    PLRecord *rec = [PLRecord initFromNetwork:network];
+    PLRecord *rec = [[PLRecord alloc] initFromNetwork:network andDate: [NSDate date]];
     NSLog([rec asCSV]);
     [self appendCSV: [rec asCSV]];
 }

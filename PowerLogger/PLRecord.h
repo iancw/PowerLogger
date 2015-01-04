@@ -20,8 +20,9 @@
 @property CWChannelBand band;
 @property CWChannelWidth width;
 @property NSInteger channelNo;
+@property NSDate* date;
 
-+ (PLRecord*)initFromNetwork:(CWNetwork*)network;
+- (id)initFromNetwork:(CWNetwork*)network andDate: (NSDate*) date;
 + (NSString*) csvHeader;
 - (NSString*)asCSV;
 
