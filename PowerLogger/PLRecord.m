@@ -47,14 +47,16 @@ NSDateFormatter *_formatter;
 {
     [self setRssi: [network rssiValue]];
     [self setNoise: [network noiseMeasurement]];
-    [rec setSsid: [network ssid]];
+    [self setSsid: [network ssid]];
     CWChannel *chan = [network wlanChannel];
-    [rec setBand: [chan channelBand]];
-    [rec setWidth: [chan channelWidth]];
-    [rec setChannelNo: [chan channelNumber]];
-    [rec setDate: date];
-    ec._formatter =
-    return rec;
+    [self setBand: [chan channelBand]];
+    [self setWidth: [chan channelWidth]];
+    [self setChannelNo: [chan channelNumber]];
+    [self setDate: date];
+    _formatter = [NSDateFormatter new];
+    [_formatter setDateFormat: @"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+    [_formatter setTimeZone: [NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    return self;
 }
 
 + (NSString*) csvHeader
@@ -65,7 +67,7 @@ NSDateFormatter *_formatter;
 - (NSString*) asCSV
 {
     return [NSString stringWithFormat: @"%@,%@,%@,%d,%@,%d,%d\n",
-     [self date],
+     [_formatter stringFromDate: [self date]],
      [self ssid],
      [PLRecord formatBand: [self band]],
      (int)[self channelNo],

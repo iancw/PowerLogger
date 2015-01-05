@@ -13,7 +13,6 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        
         if (argc != 2){
             NSString* progName = [[NSString stringWithUTF8String: argv[0]] lastPathComponent];
             NSString* usage = [NSString stringWithFormat: @"Usage:  %@ <path to csv>\n", progName];
@@ -27,7 +26,7 @@ int main(int argc, const char * argv[]) {
         {
             NSLog(@"Scanning...");
             [pl scanNetworks];
-            sleep(5);
+            sleep(1);
         }
     }
     return 0;
