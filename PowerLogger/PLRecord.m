@@ -54,7 +54,7 @@ NSDateFormatter *_formatter;
     [self setChannelNo: [chan channelNumber]];
     [self setDate: date];
     _formatter = [NSDateFormatter new];
-    [_formatter setDateFormat: @"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+    [_formatter setDateFormat: @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"];
     [_formatter setTimeZone: [NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     return self;
 }

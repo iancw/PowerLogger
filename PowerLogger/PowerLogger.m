@@ -21,7 +21,18 @@ NSStringEncoding _encoding;
     _path = [path stringByExpandingTildeInPath];
     _encoding = NSUTF8StringEncoding;
     
+    BOOL directoryFlag;
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:_path isDirectory:&directoryFlag];
+    if (fileExists && directoryFlag){
+        NSLog([NSString stringWithFormat: @"Detected that %@ is a directory", path]);
+        NSDate *date = [NSDate date];
+        NSDateFormatter *formatter = [NSDateFormatter new];
+        [formatter setDateFormat: @"yyyy_MM_dd_HHmm_ss"];
+        [formatter setTimeZone: [NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+        _path = [_path stringByAppendingPathComponent: [NSString stringWithFormat: @"wifi_log_%@.csv", [formatter stringFromDate: date]]];
+    }
     [[NSFileManager defaultManager] createFileAtPath: _path contents :[[PLRecord csvHeader] dataUsingEncoding: _encoding] attributes:nil];
+
     NSLog([NSString stringWithFormat: @"Writing data to %@", _path]);
     return self;
 }
@@ -34,7 +45,7 @@ NSStringEncoding _encoding;
         [handle writeData:[csv dataUsingEncoding:_encoding]];
         [handle closeFile];
     }else{
-        NSLog([NSString stringWithFormat:@"No such file %@, soemthing went wrong", _path]);
+        NSLog([NSString stringWithFormat:@"No such file %@, something went wrong", _path]);
     }
 }
 

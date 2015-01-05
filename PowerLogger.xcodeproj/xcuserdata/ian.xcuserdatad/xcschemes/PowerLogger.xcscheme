@@ -59,7 +59,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "~/data_out.csv"
+            argument = "~/wifi-logs"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

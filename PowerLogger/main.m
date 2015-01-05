@@ -19,7 +19,6 @@ int main(int argc, const char * argv[]) {
             printf([usage UTF8String]);
             return 1;
         }
-
         NSString* path = [NSString stringWithUTF8String: argv[1]];
         PowerLogger *pl = [[PowerLogger alloc] initWithPath: path];
         while(TRUE)
